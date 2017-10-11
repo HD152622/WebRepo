@@ -22,13 +22,13 @@ import com.google.gson.JsonObject;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/bloglogin")
 
-public class LoginServlet extends HttpServlet {
+public class BlogLoginServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
 
    
-   public LoginServlet() {
+   public BlogLoginServlet() {
       super();
       // TODO Auto-generated constructor stub
    }
@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
    
    protected void doGet(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-      RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");
+      RequestDispatcher rd = request.getRequestDispatcher("/jsp/bloglogin.jsp");
       rd.forward(request, response);
    }
 
@@ -53,46 +53,23 @@ public class LoginServlet extends HttpServlet {
       System.out.printf("id : %s, pwd : %s", id, pwd);
       
       
-      boolean result = true;
-      if (result) {
+     
+      if (id.equals("test@naver.com")) {
          // 세션에 사용자 생성
          HttpSession session = request.getSession();
          UserVO user = new UserVO();
          user.setId(id);
-         user.setName("홍길동");
-         user.setNickname("의적");
+         user.setName("유민");
          session.setAttribute("user", user);
         
          
-         RequestDispatcher rd = request.getRequestDispatcher("jsp/home.jsp");
+         RequestDispatcher rd = request.getRequestDispatcher("jsp/myblog.jsp");
          rd.forward(request, response);
       }
       else{
     	  request.setAttribute("msg", "error");
-    	  RequestDispatcher rd = request.getRequestDispatcher("jsp/login.jsp");
-      rd.forward(request, response);}
-     
+    	  RequestDispatcher rd = request.getRequestDispatcher("jsp/myblog.jsp");
+      rd.forward(request, response);
+      }
    }
-
-   protected void doPost2(HttpServletRequest request, HttpServletResponse response)
-         throws ServletException, IOException {
-      // TODO Auto-generated method stub
-      response.setContentType("application/json;charset=utf-8");
-      PrintWriter out = response.getWriter();
-
-      String id = request.getParameter("id");
-      String pwd = request.getParameter("pwd");
-      
-
-      JsonObject jo = new JsonObject();
-
-      jo.addProperty("id", id);
-
-      out.write(jo.toString());
-
-      System.out.println(jo.toString());
-
-      out.close();
-   }
-
 }

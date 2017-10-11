@@ -13,30 +13,28 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogoutServlet
  */
-@WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/bloglogout")
+public class BlogLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public LogoutServlet() {
+    public BlogLogoutServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//세션 삭제
+
 		HttpSession session = request.getSession();
-		//session.removeAttribute();
 		session.invalidate();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("jsp/home.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("jsp/myblog.jsp");
         rd.forward(request, response);
 	}
 
